@@ -1,4 +1,4 @@
-import { Outlet, createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Outlet, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import { AppShell } from "@/components/AppShell";
@@ -12,13 +12,18 @@ export const Route = createFileRoute("/_app")({
 function AuthenticatedLayout() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const href = useRouterState({ select: (s) => s.location.href });
 
   useEffect(() => {
     if (!loading && !user) {
-      void navigate({ href: `/auth?redirect=${encodeURIComponent(href)}`, replace: true });
+      if (typeof window !== "undefined") {
+        window.sessionStorage.setItem(
+          "elfa:redirect",
+          `${window.location.pathname}${window.location.search}`,
+        );
+      }
+      void navigate({ to: "/auth", replace: true });
     }
-  }, [loading, user, navigate, href]);
+  }, [loading, user, navigate]);
 
   if (loading || !user) {
     return (
