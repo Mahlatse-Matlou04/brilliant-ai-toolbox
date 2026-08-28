@@ -82,7 +82,7 @@ function Dashboard() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10">
-            <Link to="/tools/homework">Get homework help</Link>
+            <Link to="/tools/$toolId" params={{ toolId: "homework" }}>Get homework help</Link>
           </Button>
         </div>
       </section>

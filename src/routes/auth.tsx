@@ -13,10 +13,14 @@ import { lovable } from "@/integrations/lovable/index";
 import { supabase } from "@/integrations/supabase/client";
 import { AI_DISCLAIMER } from "@/lib/tools";
 
-const searchSchema = z.object({ redirect: z.string().optional() });
+type AuthSearch = { redirect?: string | undefined };
+
+const validateSearch = (search: Record<string, unknown>): AuthSearch => ({
+  redirect: typeof search["redirect"] === "string" ? (search["redirect"] as string) : undefined,
+});
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: searchSchema,
+  validateSearch,
   head: () => ({
     meta: [
       { title: "Sign in — ELFA Easy Learning For All" },

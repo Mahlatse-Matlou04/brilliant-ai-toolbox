@@ -24,11 +24,11 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/chat", label: "Study Chat", icon: MessagesSquare },
-  { to: "/tools/homework", label: "Homework Helper", icon: BookOpenCheck },
-  { to: "/tools/notes", label: "Notes Summariser", icon: NotebookPen },
-  { to: "/tools/planner", label: "Study Planner", icon: CalendarClock },
-  { to: "/tools/research", label: "Research Assistant", icon: Telescope },
-  { to: "/tools/email", label: "Email Writer", icon: Mail },
+  { to: "/tools/$toolId", params: { toolId: "homework" }, label: "Homework Helper", icon: BookOpenCheck },
+  { to: "/tools/$toolId", params: { toolId: "notes" }, label: "Notes Summariser", icon: NotebookPen },
+  { to: "/tools/$toolId", params: { toolId: "planner" }, label: "Study Planner", icon: CalendarClock },
+  { to: "/tools/$toolId", params: { toolId: "research" }, label: "Research Assistant", icon: Telescope },
+  { to: "/tools/$toolId", params: { toolId: "email" }, label: "Email Writer", icon: Mail },
   { to: "/library", label: "My Library", icon: LibraryBig },
   { to: "/responsible-ai", label: "Responsible AI", icon: ShieldCheck },
 ] as const;
@@ -38,12 +38,16 @@ function NavLinks({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
 
   return (
     <nav className="flex flex-col gap-1">
-      {NAV.map(({ to, label, icon: Icon }) => {
-        const active = pathname === to || pathname.startsWith(`${to}/`);
+      {NAV.map((item) => {
+        const { label, icon: Icon } = item;
+        const params = "params" in item ? item.params : undefined;
+        const href = params ? `/tools/${params.toolId}` : item.to;
+        const active = pathname === href || pathname.startsWith(`${href}/`);
         return (
           <Link
-            key={to}
-            to={to}
+            key={href}
+            to={item.to}
+            {...(params ? { params } : {})}
             onClick={onNavigate}
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
