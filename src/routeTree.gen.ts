@@ -16,6 +16,7 @@ import { Route as AuthChatRouteImport } from './routes/_auth.chat'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthChatIndexRouteImport } from './routes/_auth.chat.index'
+import { Route as AuthChatThreadIdRouteImport } from './routes/_auth.chat.$threadId'
 import { Route as AuthToolsToolIdRouteImport } from './routes/_auth.tools.$toolId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +53,11 @@ const AuthChatIndexRoute = AuthChatIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthChatRoute,
 } as any)
+const AuthChatThreadIdRoute = AuthChatThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => AuthChatRoute,
+} as any)
 const AuthToolsToolIdRoute = AuthToolsToolIdRouteImport.update({
   id: '/tools/$toolId',
   path: '/tools/$toolId',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof AuthChatRouteWithChildren
   '/dashboard': typeof AuthDashboardRoute
   '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof AuthChatThreadIdRoute
   '/tools/$toolId': typeof AuthToolsToolIdRoute
   '/chat/': typeof AuthChatIndexRoute
 }
@@ -72,6 +79,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthDashboardRoute
   '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof AuthChatThreadIdRoute
   '/tools/$toolId': typeof AuthToolsToolIdRoute
   '/chat': typeof AuthChatIndexRoute
 }
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   '/_auth/chat': typeof AuthChatRouteWithChildren
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/api/chat': typeof ApiChatRoute
+  '/_auth/chat/$threadId': typeof AuthChatThreadIdRoute
   '/_auth/tools/$toolId': typeof AuthToolsToolIdRoute
   '/_auth/chat/': typeof AuthChatIndexRoute
 }
@@ -94,10 +103,18 @@ export interface FileRouteTypes {
     | '/chat'
     | '/dashboard'
     | '/api/chat'
+    | '/chat/$threadId'
     | '/tools/$toolId'
     | '/chat/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/api/chat' | '/tools/$toolId' | '/chat'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/api/chat'
+    | '/chat/$threadId'
+    | '/tools/$toolId'
+    | '/chat'
   id:
     | '__root__'
     | '/'
@@ -106,6 +123,7 @@ export interface FileRouteTypes {
     | '/_auth/chat'
     | '/_auth/dashboard'
     | '/api/chat'
+    | '/_auth/chat/$threadId'
     | '/_auth/tools/$toolId'
     | '/_auth/chat/'
   fileRoutesById: FileRoutesById
@@ -168,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthChatIndexRouteImport
       parentRoute: typeof AuthChatRoute
     }
+    '/_auth/chat/$threadId': {
+      id: '/_auth/chat/$threadId'
+      path: '/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof AuthChatThreadIdRouteImport
+      parentRoute: typeof AuthChatRoute
+    }
     '/_auth/tools/$toolId': {
       id: '/_auth/tools/$toolId'
       path: '/tools/$toolId'
@@ -179,10 +204,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthChatRouteChildren {
+  AuthChatThreadIdRoute: typeof AuthChatThreadIdRoute
   AuthChatIndexRoute: typeof AuthChatIndexRoute
 }
 
 const AuthChatRouteChildren: AuthChatRouteChildren = {
+  AuthChatThreadIdRoute: AuthChatThreadIdRoute,
   AuthChatIndexRoute: AuthChatIndexRoute,
 }
 
