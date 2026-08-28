@@ -10,24 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthChatRouteImport } from './routes/_auth.chat'
-import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
-import { Route as AuthLibraryRouteImport } from './routes/_auth.library'
-import { Route as AuthResponsibleAiRouteImport } from './routes/_auth.responsible-ai'
+import { Route as AppChatRouteImport } from './routes/_app.chat'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppLibraryRouteImport } from './routes/_app.library'
+import { Route as AppResponsibleAiRouteImport } from './routes/_app.responsible-ai'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
-import { Route as AuthChatIndexRouteImport } from './routes/_auth.chat.index'
-import { Route as AuthChatThreadIdRouteImport } from './routes/_auth.chat.$threadId'
-import { Route as AuthToolsToolIdRouteImport } from './routes/_auth.tools.$toolId'
+import { Route as AppChatIndexRouteImport } from './routes/_app.chat.index'
+import { Route as AppChatThreadIdRouteImport } from './routes/_app.chat.$threadId'
+import { Route as AppToolsToolIdRouteImport } from './routes/_app.tools.$toolId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/_auth',
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -35,83 +35,83 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthChatRoute = AuthChatRouteImport.update({
+const AppChatRoute = AppChatRouteImport.update({
   id: '/chat',
   path: '/chat',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AppRoute,
 } as any)
-const AuthDashboardRoute = AuthDashboardRouteImport.update({
+const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AppRoute,
 } as any)
-const AuthLibraryRoute = AuthLibraryRouteImport.update({
+const AppLibraryRoute = AppLibraryRouteImport.update({
   id: '/library',
   path: '/library',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AppRoute,
 } as any)
-const AuthResponsibleAiRoute = AuthResponsibleAiRouteImport.update({
+const AppResponsibleAiRoute = AppResponsibleAiRouteImport.update({
   id: '/responsible-ai',
   path: '/responsible-ai',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AppRoute,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthChatIndexRoute = AuthChatIndexRouteImport.update({
+const AppChatIndexRoute = AppChatIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthChatRoute,
+  getParentRoute: () => AppChatRoute,
 } as any)
-const AuthChatThreadIdRoute = AuthChatThreadIdRouteImport.update({
+const AppChatThreadIdRoute = AppChatThreadIdRouteImport.update({
   id: '/$threadId',
   path: '/$threadId',
-  getParentRoute: () => AuthChatRoute,
+  getParentRoute: () => AppChatRoute,
 } as any)
-const AuthToolsToolIdRoute = AuthToolsToolIdRouteImport.update({
+const AppToolsToolIdRoute = AppToolsToolIdRouteImport.update({
   id: '/tools/$toolId',
   path: '/tools/$toolId',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/chat': typeof AuthChatRouteWithChildren
-  '/dashboard': typeof AuthDashboardRoute
-  '/library': typeof AuthLibraryRoute
-  '/responsible-ai': typeof AuthResponsibleAiRoute
+  '/chat': typeof AppChatRouteWithChildren
+  '/dashboard': typeof AppDashboardRoute
+  '/library': typeof AppLibraryRoute
+  '/responsible-ai': typeof AppResponsibleAiRoute
   '/api/chat': typeof ApiChatRoute
-  '/chat/$threadId': typeof AuthChatThreadIdRoute
-  '/tools/$toolId': typeof AuthToolsToolIdRoute
-  '/chat/': typeof AuthChatIndexRoute
+  '/chat/$threadId': typeof AppChatThreadIdRoute
+  '/tools/$toolId': typeof AppToolsToolIdRoute
+  '/chat/': typeof AppChatIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/dashboard': typeof AuthDashboardRoute
-  '/library': typeof AuthLibraryRoute
-  '/responsible-ai': typeof AuthResponsibleAiRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/library': typeof AppLibraryRoute
+  '/responsible-ai': typeof AppResponsibleAiRoute
   '/api/chat': typeof ApiChatRoute
-  '/chat/$threadId': typeof AuthChatThreadIdRoute
-  '/tools/$toolId': typeof AuthToolsToolIdRoute
-  '/chat': typeof AuthChatIndexRoute
+  '/chat/$threadId': typeof AppChatThreadIdRoute
+  '/tools/$toolId': typeof AppToolsToolIdRoute
+  '/chat': typeof AppChatIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_auth': typeof AuthRouteWithChildren
+  '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
-  '/_auth/chat': typeof AuthChatRouteWithChildren
-  '/_auth/dashboard': typeof AuthDashboardRoute
-  '/_auth/library': typeof AuthLibraryRoute
-  '/_auth/responsible-ai': typeof AuthResponsibleAiRoute
+  '/_app/chat': typeof AppChatRouteWithChildren
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/library': typeof AppLibraryRoute
+  '/_app/responsible-ai': typeof AppResponsibleAiRoute
   '/api/chat': typeof ApiChatRoute
-  '/_auth/chat/$threadId': typeof AuthChatThreadIdRoute
-  '/_auth/tools/$toolId': typeof AuthToolsToolIdRoute
-  '/_auth/chat/': typeof AuthChatIndexRoute
+  '/_app/chat/$threadId': typeof AppChatThreadIdRoute
+  '/_app/tools/$toolId': typeof AppToolsToolIdRoute
+  '/_app/chat/': typeof AppChatIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,21 +140,21 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/_auth'
+    | '/_app'
     | '/auth'
-    | '/_auth/chat'
-    | '/_auth/dashboard'
-    | '/_auth/library'
-    | '/_auth/responsible-ai'
+    | '/_app/chat'
+    | '/_app/dashboard'
+    | '/_app/library'
+    | '/_app/responsible-ai'
     | '/api/chat'
-    | '/_auth/chat/$threadId'
-    | '/_auth/tools/$toolId'
-    | '/_auth/chat/'
+    | '/_app/chat/$threadId'
+    | '/_app/tools/$toolId'
+    | '/_app/chat/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
+  AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -168,11 +168,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth': {
-      id: '/_auth'
+    '/_app': {
+      id: '/_app'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AuthRouteImport
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -182,33 +182,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/chat': {
-      id: '/_auth/chat'
+    '/_app/chat': {
+      id: '/_app/chat'
       path: '/chat'
       fullPath: '/chat'
-      preLoaderRoute: typeof AuthChatRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AppChatRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/_auth/dashboard': {
-      id: '/_auth/dashboard'
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthDashboardRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/_auth/library': {
-      id: '/_auth/library'
+    '/_app/library': {
+      id: '/_app/library'
       path: '/library'
       fullPath: '/library'
-      preLoaderRoute: typeof AuthLibraryRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AppLibraryRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/_auth/responsible-ai': {
-      id: '/_auth/responsible-ai'
+    '/_app/responsible-ai': {
+      id: '/_app/responsible-ai'
       path: '/responsible-ai'
       fullPath: '/responsible-ai'
-      preLoaderRoute: typeof AuthResponsibleAiRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AppResponsibleAiRouteImport
+      parentRoute: typeof AppRoute
     }
     '/api/chat': {
       id: '/api/chat'
@@ -217,65 +217,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/chat/': {
-      id: '/_auth/chat/'
+    '/_app/chat/': {
+      id: '/_app/chat/'
       path: '/'
       fullPath: '/chat/'
-      preLoaderRoute: typeof AuthChatIndexRouteImport
-      parentRoute: typeof AuthChatRoute
+      preLoaderRoute: typeof AppChatIndexRouteImport
+      parentRoute: typeof AppChatRoute
     }
-    '/_auth/chat/$threadId': {
-      id: '/_auth/chat/$threadId'
+    '/_app/chat/$threadId': {
+      id: '/_app/chat/$threadId'
       path: '/$threadId'
       fullPath: '/chat/$threadId'
-      preLoaderRoute: typeof AuthChatThreadIdRouteImport
-      parentRoute: typeof AuthChatRoute
+      preLoaderRoute: typeof AppChatThreadIdRouteImport
+      parentRoute: typeof AppChatRoute
     }
-    '/_auth/tools/$toolId': {
-      id: '/_auth/tools/$toolId'
+    '/_app/tools/$toolId': {
+      id: '/_app/tools/$toolId'
       path: '/tools/$toolId'
       fullPath: '/tools/$toolId'
-      preLoaderRoute: typeof AuthToolsToolIdRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AppToolsToolIdRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
-interface AuthChatRouteChildren {
-  AuthChatThreadIdRoute: typeof AuthChatThreadIdRoute
-  AuthChatIndexRoute: typeof AuthChatIndexRoute
+interface AppChatRouteChildren {
+  AppChatThreadIdRoute: typeof AppChatThreadIdRoute
+  AppChatIndexRoute: typeof AppChatIndexRoute
 }
 
-const AuthChatRouteChildren: AuthChatRouteChildren = {
-  AuthChatThreadIdRoute: AuthChatThreadIdRoute,
-  AuthChatIndexRoute: AuthChatIndexRoute,
+const AppChatRouteChildren: AppChatRouteChildren = {
+  AppChatThreadIdRoute: AppChatThreadIdRoute,
+  AppChatIndexRoute: AppChatIndexRoute,
 }
 
-const AuthChatRouteWithChildren = AuthChatRoute._addFileChildren(
-  AuthChatRouteChildren,
-)
+const AppChatRouteWithChildren =
+  AppChatRoute._addFileChildren(AppChatRouteChildren)
 
-interface AuthRouteChildren {
-  AuthChatRoute: typeof AuthChatRouteWithChildren
-  AuthDashboardRoute: typeof AuthDashboardRoute
-  AuthLibraryRoute: typeof AuthLibraryRoute
-  AuthResponsibleAiRoute: typeof AuthResponsibleAiRoute
-  AuthToolsToolIdRoute: typeof AuthToolsToolIdRoute
+interface AppRouteChildren {
+  AppChatRoute: typeof AppChatRouteWithChildren
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppLibraryRoute: typeof AppLibraryRoute
+  AppResponsibleAiRoute: typeof AppResponsibleAiRoute
+  AppToolsToolIdRoute: typeof AppToolsToolIdRoute
 }
 
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthChatRoute: AuthChatRouteWithChildren,
-  AuthDashboardRoute: AuthDashboardRoute,
-  AuthLibraryRoute: AuthLibraryRoute,
-  AuthResponsibleAiRoute: AuthResponsibleAiRoute,
-  AuthToolsToolIdRoute: AuthToolsToolIdRoute,
+const AppRouteChildren: AppRouteChildren = {
+  AppChatRoute: AppChatRouteWithChildren,
+  AppDashboardRoute: AppDashboardRoute,
+  AppLibraryRoute: AppLibraryRoute,
+  AppResponsibleAiRoute: AppResponsibleAiRoute,
+  AppToolsToolIdRoute: AppToolsToolIdRoute,
 }
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRoute: AuthRouteWithChildren,
+  AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   ApiChatRoute: ApiChatRoute,
 }
