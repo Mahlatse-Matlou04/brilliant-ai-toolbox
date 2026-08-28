@@ -59,7 +59,7 @@ function NavLinks({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   );
 }
 
-function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const { user, signOut } = useAuth();
 
   return (
