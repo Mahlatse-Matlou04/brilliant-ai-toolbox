@@ -13,12 +13,7 @@ import { lovable } from "@/integrations/lovable/index";
 import { supabase } from "@/integrations/supabase/client";
 import { AI_DISCLAIMER } from "@/lib/tools";
 
-type AuthSearch = { redirect?: string | undefined };
-
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>): AuthSearch => ({
-    redirect: typeof search["redirect"] === "string" ? (search["redirect"] as string) : undefined,
-  }),
 
   head: () => ({
     meta: [
@@ -39,6 +34,11 @@ const credentialsSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters").max(72),
 });
 
+function redirectParam() {
+  if (typeof window === "undefined") return undefined;
+  return new URLSearchParams(window.location.search).get("redirect") ?? undefined;
+}
+
 function safePath(value: string | undefined) {
   if (!value) return "/dashboard";
   try {
@@ -53,7 +53,6 @@ function safePath(value: string | undefined) {
 function AuthPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const search = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -61,9 +60,9 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      void navigate({ to: safePath(search.redirect), replace: true });
+      void navigate({ to: safePath(redirectParam()), replace: true });
     }
-  }, [loading, user, navigate, search.redirect]);
+  }, [loading, user, navigate, redirectParam()]);
 
   const validate = () => {
     const parsed = credentialsSchema.safeParse({ email, password });
@@ -119,7 +118,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    void navigate({ to: safePath(search.redirect), replace: true });
+    void navigate({ to: safePath(redirectParam()), replace: true });
   };
 
   return (
