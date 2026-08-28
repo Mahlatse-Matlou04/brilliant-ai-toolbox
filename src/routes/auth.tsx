@@ -36,7 +36,9 @@ const credentialsSchema = z.object({
 
 function redirectParam() {
   if (typeof window === "undefined") return undefined;
-  return new URLSearchParams(window.location.search).get("redirect") ?? undefined;
+  const stored = window.sessionStorage.getItem("elfa:redirect");
+  window.sessionStorage.removeItem("elfa:redirect");
+  return stored ?? undefined;
 }
 
 function safePath(value: string | undefined) {
