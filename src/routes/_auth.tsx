@@ -16,7 +16,7 @@ function AuthenticatedLayout() {
 
   useEffect(() => {
     if (!loading && !user) {
-      void navigate({ to: "/auth", search: { redirect: href }, replace: true });
+      void navigate({ href: `/auth?redirect=${encodeURIComponent(href)}`, replace: true });
     }
   }, [loading, user, navigate, href]);
 

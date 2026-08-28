@@ -60,9 +60,9 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      void navigate({ to: safePath(redirectParam()), replace: true });
+      void navigate({ href: safePath(redirectParam()), replace: true });
     }
-  }, [loading, user, navigate, redirectParam()]);
+  }, [loading, user, navigate]);
 
   const validate = () => {
     const parsed = credentialsSchema.safeParse({ email, password });
@@ -118,7 +118,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    void navigate({ to: safePath(redirectParam()), replace: true });
+    void navigate({ href: safePath(redirectParam()), replace: true });
   };
 
   return (
