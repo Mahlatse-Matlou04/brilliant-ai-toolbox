@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthToolsToolIdRouteImport } from './routes/_auth.tools.$toolId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,18 +40,25 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthToolsToolIdRoute = AuthToolsToolIdRouteImport.update({
+  id: '/tools/$toolId',
+  path: '/tools/$toolId',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthDashboardRoute
   '/api/chat': typeof ApiChatRoute
+  '/tools/$toolId': typeof AuthToolsToolIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthDashboardRoute
   '/api/chat': typeof ApiChatRoute
+  '/tools/$toolId': typeof AuthToolsToolIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,13 +67,21 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/api/chat': typeof ApiChatRoute
+  '/_auth/tools/$toolId': typeof AuthToolsToolIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/api/chat'
+  fullPaths: '/' | '/auth' | '/dashboard' | '/api/chat' | '/tools/$toolId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/api/chat'
-  id: '__root__' | '/' | '/_auth' | '/auth' | '/_auth/dashboard' | '/api/chat'
+  to: '/' | '/auth' | '/dashboard' | '/api/chat' | '/tools/$toolId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/auth'
+    | '/_auth/dashboard'
+    | '/api/chat'
+    | '/_auth/tools/$toolId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -112,15 +128,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/tools/$toolId': {
+      id: '/_auth/tools/$toolId'
+      path: '/tools/$toolId'
+      fullPath: '/tools/$toolId'
+      preLoaderRoute: typeof AuthToolsToolIdRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
 interface AuthRouteChildren {
   AuthDashboardRoute: typeof AuthDashboardRoute
+  AuthToolsToolIdRoute: typeof AuthToolsToolIdRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthDashboardRoute: AuthDashboardRoute,
+  AuthToolsToolIdRoute: AuthToolsToolIdRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
