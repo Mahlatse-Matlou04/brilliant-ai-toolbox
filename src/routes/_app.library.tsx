@@ -11,7 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { TOOLS, type ToolId } from "@/lib/tools";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_auth/library")({
+export const Route = createFileRoute("/_app/library")({
   head: () => ({
     meta: [
       { title: "My Library — ELFA" },

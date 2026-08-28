@@ -3,7 +3,7 @@ import { MessagesSquare } from "lucide-react";
 
 import logo from "@/assets/elfa-logo.png";
 
-export const Route = createFileRoute("/_auth/chat/")({
+export const Route = createFileRoute("/_app/chat/")({
   component: ChatEmptyState,
 });
 

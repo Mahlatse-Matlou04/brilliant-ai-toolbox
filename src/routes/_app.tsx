@@ -5,7 +5,7 @@ import { AppShell } from "@/components/AppShell";
 import { Spinner } from "@/components/ui/spinner";
 import { useAuth } from "@/hooks/useAuth";
 
-export const Route = createFileRoute("/_auth")({
+export const Route = createFileRoute("/_app")({
   component: AuthenticatedLayout,
 });
 

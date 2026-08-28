@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GraduationCap, HeartHandshake, Lock, ScrollText, ShieldCheck } from "lucide-react";
 
-export const Route = createFileRoute("/_auth/responsible-ai")({
+export const Route = createFileRoute("/_app/responsible-ai")({
   head: () => ({
     meta: [
       { title: "Responsible AI & POPIA — ELFA" },

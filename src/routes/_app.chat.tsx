@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_auth/chat")({
+export const Route = createFileRoute("/_app/chat")({
   head: () => ({
     meta: [
       { title: "Study Chat — ELFA" },

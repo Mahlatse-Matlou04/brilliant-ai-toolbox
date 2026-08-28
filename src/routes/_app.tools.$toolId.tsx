@@ -34,7 +34,7 @@ const ICONS = { BookOpenCheck, NotebookPen, CalendarClock, Telescope, Mail } as 
 
 const isToolId = (value: string): value is ToolId => value in TOOLS;
 
-export const Route = createFileRoute("/_auth/tools/$toolId")({
+export const Route = createFileRoute("/_app/tools/$toolId")({
   beforeLoad: ({ params }) => {
     if (!isToolId(params.toolId)) throw notFound();
   },

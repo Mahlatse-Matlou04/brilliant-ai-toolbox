@@ -23,7 +23,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { supabase } from "@/integrations/supabase/client";
 import { AI_DISCLAIMER } from "@/lib/tools";
 
-export const Route = createFileRoute("/_auth/chat/$threadId")({
+export const Route = createFileRoute("/_app/chat/$threadId")({
   component: ChatThread,
 });
 

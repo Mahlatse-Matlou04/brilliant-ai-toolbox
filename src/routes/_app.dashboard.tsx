@@ -16,7 +16,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { TOOL_LIST, AI_DISCLAIMER } from "@/lib/tools";
 
-export const Route = createFileRoute("/_auth/dashboard")({
+export const Route = createFileRoute("/_app/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — ELFA Easy Learning For All" },
