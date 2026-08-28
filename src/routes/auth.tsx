@@ -15,12 +15,11 @@ import { AI_DISCLAIMER } from "@/lib/tools";
 
 type AuthSearch = { redirect?: string | undefined };
 
-const validateSearch = (search: Record<string, unknown>): AuthSearch => ({
-  redirect: typeof search["redirect"] === "string" ? (search["redirect"] as string) : undefined,
-});
-
 export const Route = createFileRoute("/auth")({
-  validateSearch,
+  validateSearch: (search: Record<string, unknown>): AuthSearch => ({
+    redirect: typeof search["redirect"] === "string" ? (search["redirect"] as string) : undefined,
+  }),
+
   head: () => ({
     meta: [
       { title: "Sign in — ELFA Easy Learning For All" },
